@@ -1,0 +1,75 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<p:panelGrid columns="4" style="width: 100%; margin-top: 20px"
+		columnClasses="rotulo, campo, rotulo, campo">
+
+
+		<p:outputLabel value="Numero Pedido" for="cod" />
+		<p:inputText id="cod" size="10" maxlength="10" styleClass="moeda"
+			value="#{pedidoBean.pedido.id}" />
+
+
+
+		<p:outputLabel value="Data" />
+		<p:calendar value="#{pedidoBean.pedido.dataCriacao}" />
+
+
+		<p:outputLabel value="Cliente" />
+		<p:inputText />
+
+
+		<p:outputLabel value="Forma de pagamento" for="formaPagamento" />
+		<p:selectOneMenu id="formaPagamento"
+			value="#{pedidoBean.pedido.formaPagamento}">
+			<f:selectItem itemLabel="Selecione" />
+			<f:selectItems value="#{pedidoBean.formaPagamento}"
+				var="formaPagamentoVar" itemValue="#{formaPagamentoVar}"
+				itemLabel="#{formaPagamentoVar.descricao}" />
+		</p:selectOneMenu>
+
+	</p:panelGrid>
+
+	<h3></h3>
+
+	<h:form id="formulario">
+
+		<p:dataTable id="tabelaProduto"
+			emptyMessage="Nenhum registro encontrado." paginator="false"
+			value="#{pedidoBean.produtos}" var="produtoVar" rows="1"
+			style="margin-top: 20px" paginatorAlwaysVisible="false"
+			paginatorPosition="bottom">
+
+			<p:column headerText="Descrição" filterBy="#{produtoVar.descricao}"
+				sortBy="#{produtoVar.descricao}">
+				<h:outputText value="#{produtoVar.descricao}" />
+			</p:column>
+
+			<p:column headerText="Quantidade"
+				sortBy="#{produtoVar.quantidadeEstoque}">
+				<h:outputText value="#{produtoVar.quantidadeEstoque}" />
+			</p:column>
+
+			<p:column headerText="Preço" sortBy="#{produtoVar.valorUnitario}">
+				<h:outputText value="#{produtoVar.valorUnitario}">
+					<f:convertNumber locale="pt_BR" minFractionDigits="2" />
+				</h:outputText>
+			</p:column>
+
+
+			<p:column headerText="Opções">
+				<p:commandButton icon="ui-icon-plus"
+					actionListener="#{pedidoBean.adcionar}"
+					update=":frmCadastro:tabItens:frmItens:tabelaCesta">
+					<f:attribute name="produtoSelecionado" value="#{produtoVar}" />
+				</p:commandButton>
+			</p:column>
+		</p:dataTable>
+
+
+	</h:form>
+
+</ui:composition>

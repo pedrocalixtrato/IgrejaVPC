@@ -1,0 +1,108 @@
+<ui:composition template="/WEB-INF/template/LayoutPadrao.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="titulo">Pesquisa de Produtos</ui:define>
+
+	<ui:define name="corpo">
+
+		
+		<h1>Pesquisa de Lançamentos</h1>
+
+		<h:form id="frmPesquisa">
+			<p:messages id="messages" autoUpdate="true" closable="true" />
+
+			<p:toolbar style="margin-top: 20px" id="toolb">
+				<p:toolbarGroup>
+					<p:button value="Novo" id="botaoNovo"
+						outcome="/pages/lancamentos/CadastroLancamentos.xhtml" />
+						<p:separator/>
+
+					<p:inputText />
+
+					<p:commandButton value="Pesquisar"
+						actionListener="#{pesquisaLancamentosBean.filtrar()}" update="@form" />
+				</p:toolbarGroup>
+			</p:toolbar>
+			
+			
+			<p:panelGrid columns="2" id="painel" style="width: 100%"
+				columnClasses="rotulo, campo">
+				<p:outputLabel value="Data Inicial" for="dataLanc" />
+				<p:calendar id="dataLanc" size="10"
+					value="#{pesquisaLancamentosBean.filtro.dataInicial}" pattern="dd/MM/yyyy" />
+
+				<p:outputLabel value="Data final" />
+				<p:calendar size="10" value="#{pesquisaLancamentosBean.filtro.dataFinal}"
+					pattern="dd/MM/yyyy" />
+
+			</p:panelGrid>
+
+
+			<p:dataTable id="lancamentosTable"
+				value="#{pesquisaLancamentosBean.lancamentos}" var="lancVar"
+				style="margin-top: 20px" emptyMessage="Nenhum registro encontrado."
+				rows="10" paginator="true" paginatorAlwaysVisible="true"
+				paginatorPosition="bottom">
+				
+					<f:facet name="footer">
+						<p:outputLabel value="Total: " />
+						<h:outputText value="R$ #{pesquisaLancamentosBean.somarTotal}" />
+					</f:facet>
+				
+				
+				<p:column headerText="Codigo" style="width:50px">
+					<h:outputText value="#{lancVar.condigo}" />
+				</p:column>	
+				
+				
+				<p:column headerText="Data" sortBy="#{lancVar.data}">
+					<h:outputText value="#{lancVar.data}" >
+						<f:convertDateTime pattern="dd/MM/yyyy"/>
+					</h:outputText>
+				</p:column>
+
+				<p:column headerText="Valor" sortBy="#{lancVar.valor}">
+					<h:outputText value="#{lancVar.valor}" />
+				</p:column>
+				
+				<p:column headerText="Tipo">
+					<h:outputText value="#{lancVar.tipoLanc}" />
+				</p:column>	
+				
+				<p:column headerText="Membro"
+					style="text-align: center; width: 100px">
+					<h:outputText value="#{lancVar.membro}" />
+				</p:column>			
+				
+							
+				
+
+				<p:column style="width: 100px; text-align: center">
+					<p:button icon="ui-icon-pencil" title="Editar"
+						outcome="/pages/lancamentos/CadastroLancamentos.xhtml">
+						<f:param name="lancCod" value="#{lancVar.condigo}" />					
+						
+					</p:button>
+					<p:commandButton icon="ui-icon-trash" title="Excluir"
+						process="@this" oncomplete="PF('confirmacaoExclusao').show()"
+						update="@form" actionListener="#{lancamentosBean.excluir}">
+						<p:confirm header="Confirmação"
+							message="Deseja excluir este cadastro ?" icon="ui-icon-alert"  />
+						<f:attribute value="#{lancVar}" name="lancamentoSelecionado" />
+					</p:commandButton>
+				</p:column>
+			</p:dataTable>
+
+			<p:confirmDialog global="true">
+				<p:commandButton value="Sim" type="button"
+					styleClass="ui-confirmdialog-yes" icon="ui-icon-check" update="@form" />
+				<p:commandButton value="Não" type="button"
+					styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+			</p:confirmDialog>
+		</h:form>
+	</ui:define>
+</ui:composition>
