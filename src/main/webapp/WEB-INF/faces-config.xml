@@ -11,5 +11,11 @@
 			<default-locale>pt_BR</default-locale>
 		</locale-config>
 	</application>
+	
+	 <application>
+				<navigation-handler>
+				    org.primefaces.mobile.application.MobileNavigationHandler
+				</navigation-handler>
+	</application>
 
 </faces-config>

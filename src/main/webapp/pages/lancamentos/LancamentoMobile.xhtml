@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:o="http://omnifaces.org/ui"
+	xmlns:pm="http://primefaces.org/mobile">
+	
+	<f:view renderKitId="PRIMEFACES_MOBILE" />
+
+<h:head style="background-color:#EE799F;border:0px;">
+<h1></h1>
+		<h:form >
+			<p:tabMenu>
+			    <p:menuitem  value="Home" icon="ui-icon-home"  iconPos="top"/>
+			    <p:menuitem  value="New" icon="ui-icon-plus"  iconPos="top"
+			    			 outcome="/pages/lancamentos/LancamentoMobile.xhtml" /> 
+			    <p:menuitem value="Search" icon="ui-icon-search"  iconPos="top"
+			    			outcome="/pages/lancamentos/PesquisaLancamentosMobile.xhtml"/>
+			</p:tabMenu>
+		</h:form>
+	
+</h:head>
+<h1>MakeUp</h1>
+	
+
+<h:body  >
+		<p:growl id="msg" showDetail="true" />
+		<h1></h1>
+		
+		<h:form style="background-color:#CD2626;">		
+		
+		
+		<p:outputLabel value="Obreiro" style="color:#FFFFFF;" />
+				<p:selectOneMenu value="#{lancamentosBean.lancamentos.obreiro}">
+					<f:selectItem itemLabel="Selecione o Obreiro" />
+					<f:selectItems value="#{lancamentosBean.obreiro}" var="obreiroVar"
+						itemLabel="#{obreiroVar.descricao}" itemValue="#{obreiroVar}" />
+		</p:selectOneMenu>	
+		
+		<p:outputLabel value="Data" style="color:#FFFFFF;"/>
+		<p:calendar size="8" value="#{lancamentosBean.lancamentos.data}">
+					<f:convertDateTime pattern="dd/MM/yy" locale="pt_BR"
+						timeZone="GMT-3" />
+		</p:calendar>
+		
+						
+		<p:outputLabel value="Valor" style="color:#FFFFFF;"/>
+		<p:inputText size="8" value="#{lancamentosBean.lancamentos.valor}" />
+						
+							
+		<p:outputLabel value="Tipo" style="color:#FFFFFF;" />
+				<p:selectOneMenu value="#{lancamentosBean.lancamentos.tipoLanc}">
+					<f:selectItem itemLabel="Selecione" />
+					<f:selectItems value="#{lancamentosBean.tipo}" var="tipoVar"
+						itemLabel="#{tipoVar}" itemValue="#{tipoVar}" />
+		</p:selectOneMenu>
+		
+		 <p:outputLabel value="Membro" style="color:#FFFFFF;"/>
+		 <p:inputText value="#{lancamentosBean.lancamentos.membro}" />
+		
+			
+			
+			<p:commandButton value="salvar" 
+				update="msg" icon="ui-icon-carat-d" 
+				style="background-color:#00CD00;color:#FFFFFF;" actionListener="#{lancamentosBean.salvar()}" />
+				
+				<p:separator></p:separator>
+		</h:form>
+		
+									
+		
+</h:body>
+
+
+
+</html>
