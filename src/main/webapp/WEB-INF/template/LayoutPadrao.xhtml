@@ -15,14 +15,8 @@
 
 <h:body>
 
-<!-- 	<p:ajaxStatus styleClass="ajax-status"> -->
-<!-- 		<f:facet name="start"> -->
-<!-- 			<h:graphicImage library="images" name="loading.gif" /> -->
-<!-- 		</f:facet> -->
-<!-- 		<f:facet name="complete"> -->
-<!-- 			<h:outputText value="" /> -->
-<!-- 		</f:facet> -->
-<!-- 	</p:ajaxStatus> -->
+	<p:ajaxStatus styleClass="ajax-status" onsuccess="configurarMoeda()">		
+	</p:ajaxStatus>
 
 	<p:layout fullPage="true" style="min-width:400px;min-height:200px;">
 
@@ -63,6 +57,15 @@
 
 
 	<p:separator style="margin-top: 20px" />
+	
+	<script>
+		function configurarMoeda(){
+				$(".moeda").maskMoney({ decimal:",",thousands:".", allowZero:true });
+			} 
+		$(document).ready(function(){
+				configurarMoeda();
+			});
+	</script>
 
 </h:body>
 

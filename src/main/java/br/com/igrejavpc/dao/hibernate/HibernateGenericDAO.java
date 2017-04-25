@@ -5,18 +5,13 @@ import java.lang.reflect.ParameterizedType;
 import java.util.List;
 
 import javax.annotation.Resource;
-import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.transaction.NotSupportedException;
-import javax.transaction.SystemException;
-import javax.transaction.Transactional;
 import javax.transaction.UserTransaction;
 
 import org.apache.commons.beanutils.PropertyUtils;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
-import org.hibernate.Transaction;
 import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
 

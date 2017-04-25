@@ -27,7 +27,9 @@ public class ContasAPagar implements Serializable {
 	private BigDecimal valor;
 	private String fornecedor;
 	private String cheque;
-	
+	private Date dataBaixa;
+	private String descricao;
+	private String observacao;
 	
 	@Id	
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -53,6 +55,8 @@ public class ContasAPagar implements Serializable {
 	public void setData(Date data) {
 		this.data = data;
 	}
+	
+	
 	public BigDecimal getValor() {
 		return valor;
 	}
@@ -70,6 +74,25 @@ public class ContasAPagar implements Serializable {
 	}
 	public void setCheque(String cheque) {
 		this.cheque = cheque;
+	}
+	@Temporal(TemporalType.DATE)
+	public Date getDataBaixa() {
+		return dataBaixa;
+	}
+	public void setDataBaixa(Date dataBaixa) {
+		this.dataBaixa = dataBaixa;
+	}
+	public String getDescricao() {
+		return descricao;
+	}
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+	public String getObservacao() {
+		return observacao;
+	}
+	public void setObservacao(String observacao) {
+		this.observacao = observacao;
 	}
 	
 	

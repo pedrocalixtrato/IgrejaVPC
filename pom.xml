@@ -59,13 +59,8 @@
 			<scope>provided</scope>
 		</dependency>
 		
-		<!-- Implementaçao Mobile -->
+		<!-- Implementaçao Mobile -->		
 		
-		<dependency>
-				<groupId>org.primefaces</groupId>
-				<artifactId>primefaces</artifactId>
-				<version>5.3</version>
-			</dependency>
 			<dependency>
 				<groupId>org.primefaces.extensions</groupId>
 				<artifactId>primefaces-extensions</artifactId>
@@ -157,6 +152,30 @@
 			<artifactId>font-awesome</artifactId>
 			<version>4.6.2</version>
 		</dependency>
+		
+		<!-- JasperReports -->
+		<dependency>
+			<groupId>net.sf.jasperreports</groupId>
+			<artifactId>jasperreports</artifactId>
+			<version>6.1.1</version>
+			<scope>compile</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>net.sf.jasperreports</groupId>
+			<artifactId>jasperreports-fonts</artifactId>
+			<version>6.0.0</version>
+			<scope>compile</scope>
+		</dependency>
+		
+		<!-- API de Servlet -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>3.0.1</version>
+			<scope>provided</scope>
+		</dependency>
+		
 
 	</dependencies>
 

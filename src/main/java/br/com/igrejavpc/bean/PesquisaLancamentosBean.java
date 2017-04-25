@@ -2,8 +2,10 @@ package br.com.igrejavpc.bean;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -25,6 +27,14 @@ public class PesquisaLancamentosBean implements Serializable{
 	private LancamentosDAO lancamentosDAO;
 	
 	
+	
+	@PostConstruct
+	public void init(){	
+		filtro = new LancamentosFilter();
+		this.filtro.setDataInicial(new Date());
+		this.filtro.setDataFinal(new Date());
+		
+	}
 	
 	public void filtrar(){
 		

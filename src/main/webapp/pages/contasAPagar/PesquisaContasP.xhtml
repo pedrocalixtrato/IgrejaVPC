@@ -22,6 +22,9 @@
 					<p:separator />
 
 					<p:inputText />
+					
+					<p:commandButton value="Imprimir"
+						actionListener="#{contasAPagarBean.imprimir()}" update="contasTable" />
 
 					<p:commandButton value="Pesquisar"
 						actionListener="#{contasAPagarBean.filtrar}" update="contasTable" />

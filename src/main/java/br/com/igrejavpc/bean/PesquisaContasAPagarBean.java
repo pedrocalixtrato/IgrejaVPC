@@ -37,6 +37,8 @@ public class PesquisaContasAPagarBean implements Serializable{
 	}
 	
 	
+	
+	
 	public List<ContasAPagar> getContasVencidas() {
 		return contasVencidas;
 	}

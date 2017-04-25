@@ -12,7 +12,7 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import org.jboss.logging.annotations.Message;
+
 import org.omnifaces.util.Messages;
 
 import antlr.debug.Event;
@@ -47,8 +47,10 @@ public class LancamentosBean implements Serializable {
 	public void salvar(){
 		
 		try{
-			lancamentosDAO.salvar(lancamentos);			
+			lancamentosDAO.salvar(lancamentos);	
+			lancamentos = new Lancamentos();
 			Messages.addGlobalInfo("Salvo com sucesso!");
+			
 			
 		}catch(RuntimeException e){
 			Messages.addGlobalError("Erro ao salvar este lançamento");

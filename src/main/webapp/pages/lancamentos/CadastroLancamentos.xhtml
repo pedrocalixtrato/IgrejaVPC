@@ -59,7 +59,8 @@
 				</p:calendar>
 				
 				<p:outputLabel value="Valor" />
-				<p:inputText size="8" value="#{lancamentosBean.lancamentos.valor}" />	
+				<p:inputText size="8" value="#{lancamentosBean.lancamentos.valor}"
+							 styleClass="moeda" />	
 				
 				<p:outputLabel value="Tipo" />
 				<p:selectOneMenu value="#{lancamentosBean.lancamentos.tipoLanc}">
@@ -76,39 +77,7 @@
 			</p:panelGrid>
 
 			<p:tabView style="margin-top: 20px">
-<!-- 				<p:tab title="Dados Fiscais"> -->
-<!-- 					<p:panelGrid columns="4" -->
-<!-- 						columnClasses="rotulo, campo, rotulo, campo"> -->
 
-<!-- 						<p:outputLabel value="Cod. NCM" /> -->
-<!-- 						<h:inputText size="20" value="#{produtoBean.produto.ncm}" /> -->
-
-<!-- 						<p:outputLabel value="CST" /> -->
-<!-- 						<h:inputText value="#{produtoBean.produto.cst}" />					 -->
-
-
-<!-- 					</p:panelGrid> -->
-<!-- 				</p:tab> -->
-<!-- 				<p:tab title="Complemento"> -->
-
-<!-- 					<p:panelGrid columns="4" -->
-<!-- 						columnClasses="rotulo, campo, rotulo, campo"> -->
-
-
-<!-- 						<p:outputLabel value="Aplicação" /> -->
-<!-- 						<h:inputText size="20" /> -->
-
-<!-- 						<p:outputLabel value="Especificação" /> -->
-<!-- 						<h:inputText size="20"  /> -->
-
-
-
-<!-- 					</p:panelGrid> -->
-
-<!-- 				</p:tab> -->
-<!-- 				<p:tab title="Detalhamento"> -->
-
-<!-- 				</p:tab> -->
 			</p:tabView>
 
 		</h:form>

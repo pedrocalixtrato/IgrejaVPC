@@ -7,98 +7,99 @@
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:o="http://omnifaces.org/ui"
 	xmlns:pm="http://primefaces.org/mobile">
-	
-	<f:view renderKitId="PRIMEFACES_MOBILE" />
+
+<f:view renderKitId="PRIMEFACES_MOBILE" />
 
 <h:head style="background-color:#EE799F;border:0px;">
-<h1></h1>
-		<h:form >
-			<p:tabMenu>
-			    <p:menuitem  value="Home" icon="ui-icon-home"  iconPos="top"/>
-			    <p:menuitem  value="New" icon="ui-icon-plus"  iconPos="top"
-			    			 outcome="/pages/lancamentos/LancamentoMobile.xhtml"/> 
-			    <p:menuitem value="Search" icon="ui-icon-search"  iconPos="top"/>
-			</p:tabMenu>
-		</h:form>
-	
+	<h1></h1>
+	<h:form style="margin-left:10px;margin-right:10px">
+		<p:tabMenu>
+			<p:menuitem value="Home" icon="ui-icon-home" iconPos="top" />
+			<p:menuitem value="New" icon="ui-icon-plus" iconPos="top"
+				outcome="/pages/lancamentos/LancamentoMobile.xhtml" />
+			<p:menuitem value="Search" icon="ui-icon-search" iconPos="top"
+				outcome="/pages/lancamentos/PesquisaLancamentosMobile.xhtml" />
+		</p:tabMenu>
+	</h:form>
+
 </h:head>
-<h1>Pesquisa</h1>
-	
 
-<h:body  >
-		
-		<h:form id="frm">
-		
+
+<h2 style="margin-left: 15px">Pesquisa</h2>
+
+<h:body>
+	<h:form id="frm" style="margin-left:15px;margin-right:15px">
+		<p:growl id="msg" sticky="false" life="1500" />
 		<p:panelGrid id="painel" style="width: 100%">
-		
-				<p:outputLabel value="Data Inicial" for="dataLanc" />
-				<p:calendar id="dataLanc" size="10"
-					value="#{pesquisaLancamentosBean.filtro.dataInicial}" 
-					pattern="dd/MM/yyyy" />
 
-				<p:outputLabel value="Data final" />
-				<p:calendar size="10" value="#{pesquisaLancamentosBean.filtro.dataFinal}"
-					pattern="dd/MM/yyyy" />
-					
-				<h1></h1>
-				<p:outputLabel value="Total: " />
-				<h:outputText value="R$ #{pesquisaLancamentosBean.somarTotal}" />
+			<p:outputLabel value="Data Inicial" for="dataLanc"
+				style="font-weight: bolder;" />
+			<p:calendar id="dataLanc" size="10"
+				value="#{pesquisaLancamentosBean.filtro.dataInicial}"
+				pattern="dd/MM/yyyy" />
 
-			</p:panelGrid>
-			
-			<p:commandButton value="Pesquisar" actionListener="#{pesquisaLancamentosBean.filtrar()}"
-							update="frm"/>
-							
-			<p:dataTable id="lancamentosTable"
-				value="#{pesquisaLancamentosBean.lancamentos}" var="lancVar"
-						 reflow="true"
-						 paginator="true" paginatorAlwaysVisible="true"
-						 paginatorPosition="bottom">	
-						 
-				       
-		 
-		        <p:column headerText="Data" sortBy="#{lancVar.data}">
-					<h:outputText value="#{lancVar.data}" >
-						<f:convertDateTime pattern="dd/MM/yyyy"/>
-					</h:outputText>
-				</p:column>
+			<p:outputLabel value="Data final" style="font-weight: bolder;" />
+			<p:calendar size="10"
+				value="#{pesquisaLancamentosBean.filtro.dataFinal}"
+				pattern="dd/MM/yyyy" />
 
-				<p:column headerText="Valor" sortBy="#{lancVar.valor}">
-					<h:outputText value="#{lancVar.valor}" />
-				</p:column>
-				
-				<p:column headerText="Tipo">
-					<h:outputText value="#{lancVar.tipoLanc}" />
-				</p:column>	
-				
-				<p:column headerText="Membro"
-					style="text-align: center; width: 100px">
-					<h:outputText value="#{lancVar.membro}" />
-				</p:column>					
+			<h1></h1>
+			<p:outputLabel value="Total: " style="font-weight: bolder;" />
+			<h:outputText value="R$ #{pesquisaLancamentosBean.somarTotal}"
+				style="font-weight: bolder;" />
 
-				<p:column style="width: 100px; text-align: center">					
-					<p:commandButton icon="ui-icon-delete" title="Excluir"
-						process="@this" oncomplete="PF('confirmacaoExclusao').show()"
-						update="@form" actionListener="#{lancamentosBean.excluir}">
-						<p:confirm header="Confirmação"
-							message="Deseja excluir este cadastro ?" icon="ui-icon-alert"  />
-						<f:attribute value="#{lancVar}" name="lancamentoSelecionado" />
-					</p:commandButton>
-				</p:column>
-		        		        
-	    	</p:dataTable>
-	    	
-	    	<p:confirmDialog global="true">
-				<p:commandButton value="Sim" type="button"
-					styleClass="ui-confirmdialog-yes" icon="ui-icon-check" update="form" />
-				<p:commandButton value="Não" type="button"
-					styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
-			</p:confirmDialog>
-	    
-	    </h:form>				
-		
+		</p:panelGrid>
+
+		<p:commandButton value="Pesquisar"
+			actionListener="#{pesquisaLancamentosBean.filtrar()}" update="frm" />
+
+		<p:dataTable id="lancamentosTable"
+			value="#{pesquisaLancamentosBean.lancamentos}" var="lancVar"
+			reflow="true" paginator="true" paginatorAlwaysVisible="true"
+			paginatorPosition="bottom">
+
+
+
+			<p:column headerText="Data" sortBy="#{lancVar.data}">
+				<h:outputText value="#{lancVar.data}">
+					<f:convertDateTime pattern="dd/MM/yyyy" />
+				</h:outputText>
+			</p:column>
+
+			<p:column headerText="Valor" sortBy="#{lancVar.valor}">
+				<h:outputText value="#{lancVar.valor}" />
+			</p:column>
+
+			<p:column headerText="Tipo">
+				<h:outputText value="#{lancVar.tipoLanc}" />
+			</p:column>
+
+			<p:column headerText="Membro"
+				style="text-align: center; width: 100px">
+				<h:outputText value="#{lancVar.membro}" />
+			</p:column>
+
+			<p:column style="width: 100px; text-align: center">
+				<p:commandButton icon="ui-icon-delete" title="Excluir"
+					update="@form lancamentosTable"
+					actionListener="#{lancamentosBean.excluir}">
+					<p:confirm header="Confirmação"
+						message="Deseja excluir este cadastro ?" icon="ui-icon-alert" />
+					<f:attribute value="#{lancVar}" name="lancamentoSelecionado" />
+
+				</p:commandButton>
+			</p:column>
+
+		</p:dataTable>
+
+		<p:confirmDialog global="true">
+			<p:commandButton value="Sim" type="button"
+				styleClass="ui-confirmdialog-yes" icon="ui-icon-check" update="form" />
+			<p:commandButton value="Não" type="button"
+				styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+		</p:confirmDialog>
+
+	</h:form>
+
 </h:body>
-
-
-
 </html>
