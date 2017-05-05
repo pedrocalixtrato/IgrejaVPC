@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.PostConstruct;
-import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.faces.view.ViewScoped;
@@ -31,7 +30,7 @@ import br.com.igrejavpc.util.jsf.FacesUtil;
 
 
 @Named
-@RequestScoped
+@ViewScoped
 public class ContasAPagarBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -51,9 +50,9 @@ public class ContasAPagarBean implements Serializable {
 	@Inject
 	private EntityManager em;
 	
-	
+	@Inject
 	private FacesContext facesContext ;
-	
+	@Inject
 	private HttpServletResponse response ;
 	
 
@@ -94,7 +93,7 @@ public class ContasAPagarBean implements Serializable {
 	}
 
 	public void filtrar() {
-
+			
 		this.contasVencidas = contasAPagarDAO.filtro(filtro);
 		this.somarTotal = contasAPagarDAO.somarTotal(filtro);
 
@@ -131,8 +130,8 @@ public class ContasAPagarBean implements Serializable {
 		parametros.put("data_fim", this.filtro.getDataFinal());		
 		
 		
-		ExecutorRelatorio executor = new ExecutorRelatorio("/relatorios/RelatorioContasP.jasper",
-				response, parametros, "Relatorio ContasPagar.pdf");
+		ExecutorRelatorio executor = new ExecutorRelatorio("/relatorios/ContasAPagar.jasper",
+				this.response, parametros, "Relatorio de Despesas.pdf");
 		
 		Session session = em.unwrap(Session.class);
 		session.doWork(executor);

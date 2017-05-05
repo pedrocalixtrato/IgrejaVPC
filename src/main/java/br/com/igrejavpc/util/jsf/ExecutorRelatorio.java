@@ -33,8 +33,7 @@ public class ExecutorRelatorio implements Work{
 	
 	
 	public ExecutorRelatorio(String caminhoRelatorio, HttpServletResponse response, Map<String, Object> parametros,
-			String nomeArquivoSaida) {
-		super();
+			String nomeArquivoSaida) {		
 		this.caminhoRelatorio = caminhoRelatorio;
 		this.response = response;
 		this.parametros = parametros;
@@ -46,15 +45,16 @@ public class ExecutorRelatorio implements Work{
 
 
 	public void execute(Connection connection) throws SQLException{
-		InputStream relatorioStream = this.getClass().getResourceAsStream(this.caminhoRelatorio);
 		
-		try {
-			JasperPrint print = JasperFillManager.fillReport(relatorioStream,this.parametros, connection);
+		try{
+			InputStream relatorioStream = this.getClass().getResourceAsStream(this.caminhoRelatorio);
+		
+			JasperPrint print = JasperFillManager.fillReport(relatorioStream, this.parametros, connection);
 			this.relatorioGerado = print.getPages().size() > 0;
 			
 			if (this.relatorioGerado) {
 				Exporter<ExporterInput, PdfReportConfiguration, PdfExporterConfiguration, 
-			    	OutputStreamExporterOutput> exportador = new JRPdfExporter();
+			    OutputStreamExporterOutput> exportador = new JRPdfExporter();
 				exportador.setExporterInput(new SimpleExporterInput(print));
 				exportador.setExporterOutput(new SimpleOutputStreamExporterOutput(response.getOutputStream()));
 				
