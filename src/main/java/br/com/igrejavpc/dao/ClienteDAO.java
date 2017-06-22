@@ -9,6 +9,7 @@ import javax.persistence.EntityManager;
 import br.com.igrejavpc.dao.hibernate.HibernateGenericDAO;
 import br.com.igrejavpc.domain.Cliente;
 
+
 @SuppressWarnings("serial")
 public class ClienteDAO extends HibernateGenericDAO<Cliente, Long> implements Serializable{
  	
@@ -24,7 +25,12 @@ public class ClienteDAO extends HibernateGenericDAO<Cliente, Long> implements Se
 	
 	}
 
-	
+	/* consulta com JPQL */
+
+	public List<Cliente> porNome(String nome) {
+		return this.em.createQuery("from Cliente where upper(nome) like :nome", Cliente.class)
+				.setParameter("nome", nome.toUpperCase() + "%").getResultList();
+	}
 	
 //public List<Cliente> listar(Cliente cliente){
 //		

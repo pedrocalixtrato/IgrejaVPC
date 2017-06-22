@@ -10,6 +10,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -26,7 +27,7 @@ public class Lancamentos implements Serializable{
 	private BigDecimal valor;
 	private TipoLanc tipoLanc;
 	private Obreiro obreiro;
-	private String membro;
+	private Cliente membro;
 	
 	
 	
@@ -66,12 +67,14 @@ public class Lancamentos implements Serializable{
 	public void setObreiro(Obreiro obreiro) {
 		this.obreiro = obreiro;
 	}
-	public String getMembro() {
+	@ManyToOne
+	public Cliente getMembro() {
 		return membro;
 	}
-	public void setMembro(String membro) {
+	public void setMembro(Cliente membro) {
 		this.membro = membro;
 	}
+	
 	
 	
 

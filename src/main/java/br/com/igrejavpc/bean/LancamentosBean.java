@@ -1,7 +1,6 @@
 package br.com.igrejavpc.bean;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -12,13 +11,13 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-
 import org.omnifaces.util.Messages;
 
-import antlr.debug.Event;
 import br.com.igrejavpc.Enum.Obreiro;
 import br.com.igrejavpc.Enum.TipoLanc;
+import br.com.igrejavpc.dao.ClienteDAO;
 import br.com.igrejavpc.dao.LancamentosDAO;
+import br.com.igrejavpc.domain.Cliente;
 import br.com.igrejavpc.domain.Lancamentos;
 
 @SuppressWarnings("serial")
@@ -29,6 +28,10 @@ public class LancamentosBean implements Serializable {
 	private Lancamentos lancamentos;
 	private List<TipoLanc> tipo;
 	private List<Obreiro> obreiro;
+	private Cliente cliente;
+	
+	@Inject
+	private ClienteDAO clienteDAO;
 	
 	
 	@Inject
@@ -49,6 +52,7 @@ public class LancamentosBean implements Serializable {
 		try{
 			lancamentosDAO.salvar(lancamentos);	
 			lancamentos = new Lancamentos();
+			this.lancamentos.setData(new Date());
 			Messages.addGlobalInfo("Salvo com sucesso!");
 			
 			
@@ -58,6 +62,10 @@ public class LancamentosBean implements Serializable {
 		}
 		
 		
+	}
+	
+	public List<Cliente> completarCliente(String nome) {
+		return this.clienteDAO.porNome(nome);
 	}
 	
 	public void excluir(ActionEvent evento){
@@ -102,6 +110,14 @@ public class LancamentosBean implements Serializable {
 
 	public void setObreiro(List<Obreiro> obreiro) {
 		this.obreiro = obreiro;
+	}
+
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
 	}
 
 	

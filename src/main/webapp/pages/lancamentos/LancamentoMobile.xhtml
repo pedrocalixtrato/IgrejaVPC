@@ -7,76 +7,85 @@
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:o="http://omnifaces.org/ui"
 	xmlns:pm="http://primefaces.org/mobile">
-	
-	<f:view renderKitId="PRIMEFACES_MOBILE" />
+
+<f:view renderKitId="PRIMEFACES_MOBILE" />
 
 <h:head style="background-color:#EE799F;border:0px;">
-<h1></h1>
-		<h:form style="margin-left:10px;margin-right:10px">
-			<p:tabMenu>
-			    <p:menuitem  value="Home" icon="ui-icon-home"  iconPos="top"
-			    			 outcome="/Home"/>
-			    <p:menuitem  value="New" icon="ui-icon-plus"  iconPos="top"
-			    			 outcome="/pages/lancamentos/LancamentoMobile.xhtml" /> 
-			    <p:menuitem value="Search" icon="ui-icon-search"  iconPos="top"
-			    			outcome="/pages/lancamentos/PesquisaLancamentosMobile.xhtml"/>
-			</p:tabMenu>
-		</h:form>
-	
+	<h1></h1>
+	<h:form style="margin-left:10px;margin-right:10px">
+		<p:tabMenu activeIndex="0">
+			<p:menuitem value="Home" icon="ui-icon-home" iconPos="top"
+				outcome="/HomeMobile.xhtml" />
+			<p:menuitem value="New" icon="ui-icon-plus" iconPos="top"
+				outcome="/pages/lancamentos/LancamentoMobile.xhtml" />
+			<p:menuitem value="Search" icon="ui-icon-search" iconPos="top"
+				outcome="/pages/lancamentos/PesquisaLancamentosMobile.xhtml" />
+		</p:tabMenu>
+	</h:form>
+
 </h:head>
 
-<h2 style="margin-left:15px">Lançamentos</h2>	
+<h2 style="margin-left: 15px">Lançamentos</h2>
 
-<h:body >
-		<p:growl id="msg" sticky="false" life="1500"/>
-		<h1></h1>
-		
-		<h:form style="margin-left:15px;margin-right:15px">		
-		
-		
+<h:body>
+	<p:growl id="msg" sticky="false" life="1500" />
+	<h1></h1>
+
+	<h:form style="margin-left:15px;margin-right:15px">
+
+
 		<p:outputLabel value="Obreiro" style="font-weight: bolder;" />
-		<p:selectOneMenu value="#{lancamentosBean.lancamentos.obreiro}" >
-					<f:selectItem itemLabel="Selecione o Obreiro" />
-					<f:selectItems value="#{lancamentosBean.obreiro}" var="obreiroVar"
-						itemLabel="#{obreiroVar.descricao}" itemValue="#{obreiroVar}" />
-		</p:selectOneMenu>	
-		
-		<p:outputLabel value="Data" style="font-weight: bolder;"/>
+		<p:selectOneMenu value="#{lancamentosBean.lancamentos.obreiro}">
+			<f:selectItem itemLabel="Selecione o Obreiro" />
+			<f:selectItems value="#{lancamentosBean.obreiro}" var="obreiroVar"
+				itemLabel="#{obreiroVar.descricao}" itemValue="#{obreiroVar}" />
+		</p:selectOneMenu>
+
+		<p:outputLabel value="Data" style="font-weight: bolder;" />
 		<p:calendar size="8" value="#{lancamentosBean.lancamentos.data}">
-					<f:convertDateTime pattern="dd/MM/yy" locale="pt_BR"
-						timeZone="GMT-3" />
+			<f:convertDateTime pattern="dd/MM/yy" locale="pt_BR" timeZone="GMT-3" />
 		</p:calendar>
-		
-						
-		<p:outputLabel value="Valor" style="font-weight: bolder;"/>
+
+
+		<p:outputLabel value="Valor" style="font-weight: bolder;" />
 		<p:inputText size="8" value="#{lancamentosBean.lancamentos.valor}"
-					 styleClass="moeda" />
-						
-							
+			styleClass="moeda" />
+
+
 		<p:outputLabel value="Tipo" style="font-weight: bolder;" />
 		<p:selectOneMenu value="#{lancamentosBean.lancamentos.tipoLanc}">
-					<f:selectItem itemLabel="Selecione" />
-					<f:selectItems value="#{lancamentosBean.tipo}" var="tipoVar"
-						itemLabel="#{tipoVar}" itemValue="#{tipoVar}" />
-				<p:ajax event="change" process="@this" 
-					update="pnlGrid"	/>
+			<f:selectItem itemLabel="Selecione" />
+			<f:selectItems value="#{lancamentosBean.tipo}" var="tipoVar"
+				itemLabel="#{tipoVar}" itemValue="#{tipoVar}" />
+			<p:ajax event="change" process="@this" update="pnlGrid" />
 		</p:selectOneMenu>
-		
+
 		<p:panelGrid id="pnlGrid">
-		 <p:outputLabel value="Membro" style="font-weight: bolder;" rendered="#{lancamentosBean.lancamentos.tipoLanc == 'DIZIMO'}" />
-		 <p:inputText value="#{lancamentosBean.lancamentos.membro}" rendered="#{lancamentosBean.lancamentos.tipoLanc == 'DIZIMO'}"/>
+			<p:outputLabel value="Membro" style="font-weight: bolder;"
+				rendered="#{lancamentosBean.lancamentos.tipoLanc == 'DIZIMO'}" />
+
+			<p:autoComplete
+				rendered="#{lancamentosBean.lancamentos.tipoLanc == 'DIZIMO'}"
+				value="#{lancamentosBean.lancamentos.membro}" style="width: 100%"
+				completeMethod="#{lancamentosBean.completarCliente}"
+				var="clienteVAR" itemLabel="#{clienteVAR.nome}"
+				itemValue="#{clienteVAR}" forceSelection="true">
+			</p:autoComplete>
+
+
 		</p:panelGrid>
-			
-			
-			<p:commandButton value="salvar" 
-				update="msg @form" icon="ui-icon-carat-d" 
-				style="background-color:#00CD00;color:#FFFFFF;" actionListener="#{lancamentosBean.salvar()}" />
-				
-				<p:separator></p:separator>
-		</h:form>
-		
-									
-		
+
+
+		<p:commandButton value="SALVAR" update="msg @form"
+			icon="ui-icon-carat-d"
+			style="background-color:#228B22;color:#FFFFFF;"
+			actionListener="#{lancamentosBean.salvar()}" />
+
+		<p:separator></p:separator>
+	</h:form>
+
+
+
 </h:body>
 
 

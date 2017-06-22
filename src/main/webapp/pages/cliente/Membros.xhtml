@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:o="http://omnifaces.org/ui"
+	xmlns:pm="http://primefaces.org/mobile">
+
+<f:view renderKitId="PRIMEFACES_MOBILE" />
+
+<h:head style="background-color:#EE799F;border:0px;">
+	<h1></h1>
+	<h:form style="margin-left:10px;margin-right:10px">
+		<p:tabMenu activeIndex="0">
+			<p:menuitem value="Home" icon="ui-icon-home" iconPos="top"
+				outcome="/HomeMobile.xhtml" />
+			<p:menuitem value="New" icon="ui-icon-plus" iconPos="top"
+				outcome="/pages/cliente/Membros.xhtml" />
+			<p:menuitem value="Search" icon="ui-icon-search" iconPos="top"
+				/>
+		</p:tabMenu>
+	</h:form>
+
+</h:head>
+
+
+
+<h:body>
+	<h2 style="margin-left: 15px">Cadastro de Membros</h2>
+	<p:growl id="msg" sticky="false" life="1500" />
+	<h1></h1>
+
+	<h:form style="margin-left:15px;margin-right:15px">
+
+						
+				
+				<p:outputLabel value="Data" style="font-weight: bolder;" />
+				<p:calendar size="8" value="#{clienteBean.cliente.dataCadastro}" >
+					<f:convertDateTime pattern="dd/MM/yy" locale="pt_BR" timeZone="GMT-3" />
+				</p:calendar>
+				
+				<p:outputLabel value="Nome" />
+				<p:inputText value="#{clienteBean.cliente.nome}" />
+
+				<p:outputLabel value="Telefone" />
+				<p:inputText value="#{clienteBean.pessoa.telefone}" />
+				
+				<p:outputLabel value="Celular" />
+				<p:inputText value="#{clienteBean.pessoa.celular}" />
+
+				<p:outputLabel value="E-MAIL" />
+				<p:inputText value="#{clienteBean.pessoa.email}" />	
+
+
+				<h2></h2>
+				<p:panel header="Endereço" toggleable="true" collapsed="true"  >
+				   <p:outputLabel value="Rua" />
+						<h:inputText size="20" value="#{clienteBean.pessoa.rua}" />
+
+						<p:outputLabel value="Complemento" />
+						<h:inputText value="#{clienteBean.pessoa.complemento}" />
+
+
+						<p:outputLabel value="Nº" />
+						<h:inputText size="5" value="#{clienteBean.pessoa.numero}" />
+
+						<p:outputLabel value="Bairro" />
+						<h:inputText  value="#{clienteBean.pessoa.bairro}" />
+
+
+						<p:outputLabel value="Cidade" />
+						<h:inputText value="#{clienteBean.pessoa.cidade}" />
+
+						<p:outputLabel value="UF" />
+						<h:inputText value="#{clienteBean.pessoa.estado}" />
+
+						<p:outputLabel value="CEP" />
+						<h:inputText value="#{clienteBean.pessoa.cep}" />
+
+						<p:outputLabel value="Cod. IBGE" />
+						<h:inputText value="#{clienteBean.pessoa.ibge}" />
+				</p:panel> 
+			<h2></h2>
+				
+				<p:panel header="Dados Eclesiásticos" toggleable="true" collapsed="true"  >				   
+				</p:panel> 
+				
+			<h2></h2>
+				
+		<p:commandButton value="salvar" update="msg @form"
+			icon="ui-icon-carat-d"
+			style="background-color:#00CD00;color:#FFFFFF;"
+			actionListener="#{clienteBean.salvar}" />
+
+		<p:separator></p:separator>
+	</h:form>
+
+
+
+</h:body>
+
+
+
+</html>
